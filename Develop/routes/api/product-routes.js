@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
   .findAll({
     include: [Category, Tag]
   })
-  .then(Category => res.json(Category))
+  .then(ProductDataDB => res.json(ProductDataDB))
   .catch(err => {
     console.log(error);
     res.status(500).json(err);
@@ -27,12 +27,12 @@ router.get('/:id', (req, res) => {
       where: { id: req.params.id },
       include: [Category, Tag]
     })
-    .then(Category => {
-      if (!Category) {
+    .then(ProductDataDB => {
+      if (!ProductDataDB) {
         res.status(404).json({ message: "Product with this id does not exist." });
         return;
       }
-      res.json(Category)
+      res.json(ProductDataDB)
     })
     .catch(err => {
       console.log(error);
@@ -123,6 +123,21 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  Product
+    .destroy({
+      where: { id: req.params.id }
+    })
+    .then(ProductDataDB => {
+      if (!ProductDataDB) {
+        res.status(404).json({ message: 'Product with this id does not exist.' });
+        return;
+      }
+      res.json({ message: 'Product deleted.' });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
