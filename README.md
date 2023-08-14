@@ -16,4 +16,4 @@ npm run seed
 npm start
 
 
-Link of walkthrough video:
+Link of walkthrough video: https://drive.google.com/file/d/1p9oKutKQhAGm0a4uC13F17IsxvmzPvCN/view 
